@@ -1,10 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 import generateTokens from "../utils/generateTokens.js";
-import { generateVerificationCode } from "../utils/utils.js";
+import { generateVerificationCode, getVerificationlink } from "../utils/utils.js";
 
-import crypto from 'crypto'
-import { Console } from "console";
 
 
 // @desc    Register a new user
@@ -41,8 +39,9 @@ const signup = asyncHandler(async (req, res) => {
     if(!success){
         throw new Error("Unable to set verification code.")
     }
-    console.log(code, "verification code!")
     //generate verification link
+    const verificationLink = getVerificationlink(user._id, code)
+    console.log(verificationLink)
     //send verification email
   } else {
     res.status(400)
@@ -50,6 +49,10 @@ const signup = asyncHandler(async (req, res) => {
   }
 });
 
+
+
+
 export default {
-    signup
+    signup,
+    verifyEmail
 }

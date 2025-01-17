@@ -20,3 +20,12 @@ export function generateVerificationCode(){
     let buffer = crypto.randomBytes(32)
     return buffer.toString('base64url')
 }
+
+/*
+  * Generate a verification link
+  * @params {string, string} - userid and verification code to verify the user
+  * @returns {string} - The verification link 
+*/
+export function getVerificationlink(userId, code){
+    return `${process.env.DOMAIN}/api/user/verify/${code}?id=${userId}`
+}
