@@ -2,6 +2,7 @@ import User from "../models/userModel";
 import asyncHandler from "express-async-handler";
 import generateTokens from "../utils/generateTokens";
 
+
 // @desc    Register a new user
 // route    POST /api/user/signup
 // @access  Public

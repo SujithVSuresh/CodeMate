@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
+// We have created the jwt token and set the token into cookie.
 const generateTokens = (res, userId) => {
-    // We have created the jwt token and set the token into cookie.
     const token = jwt.sign(
         { userId }, 
         secretKey, 
