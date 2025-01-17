@@ -1,6 +1,7 @@
 import User from "../models/userModel";
 import asyncHandler from "express-async-handler";
 import generateTokens from "../utils/generateTokens";
+import { generateVerificationCode } from "../utils/utils";
 
 
 // @desc    Register a new user
@@ -31,11 +32,18 @@ const signup = asyncHandler(async (req, res) => {
       message: "Account has been created successfully.",
     });
     console.log(`✨ [register] @${user.username} has registered an account.`);
-    //todo
-    //generate verification code
-    //set verification code
+    
+    const code = generateVerificationCode()
+    const success = await user.setVerificationCode(code)
+    if(!success){
+        throw new Error("Unable to set verification code.")
+    }
     //generate verification link
     //send verification email
   } else {
   }
 });
+
+export default {
+    signup
+}
