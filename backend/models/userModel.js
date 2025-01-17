@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { getFutureDate } from "../utils/utils";
 
 
 const userSchema = mongoose.Schema(
@@ -65,6 +66,19 @@ const userSchema = mongoose.Schema(
         timestamps: true
     }
 )
+
+
+userSchema.methods.setVerificationCode = async function (code) {
+    try{
+        this.verificationCodeRequested = true
+        this.verificationCode = code
+        this.verificationCodeExpiry = getFutureDate(2 * 60 * 60 * 1000) //2hr
+        return true
+    }catch(error){
+        console.log("Error generating code", error)
+        return false
+    }
+}
 
 const User = mongoose.model('User', userSchema)
 
