@@ -9,7 +9,7 @@ import { generateVerificationCode, getVerificationlink } from "../utils/utils.js
 // route    POST /api/user/signup
 // @access  Public
 const signup = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
+//   const { username, email, password } = req.body;
 
   const existingUser =
     (await User.findOne({ email })) || (await User.findOne({ username }));
@@ -50,7 +50,9 @@ const signup = asyncHandler(async (req, res) => {
 });
 
 
-
+const verifyEmail = asyncHandler(async (req, res) => {
+    console.log("hello how are you")
+})
 
 export default {
     signup,
